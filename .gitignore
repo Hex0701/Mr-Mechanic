@@ -1,0 +1,36 @@
+# Node.js dependencies
+server/node_modules/
+npm-debug.log*
+
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+
+# Build output
+dist/
+build/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# React-specific
+client/node_modules/
+client/build/
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# MacOS files
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows system files
+*.lnk
