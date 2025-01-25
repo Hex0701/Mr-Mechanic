@@ -18,9 +18,9 @@ def predict():
         "engine_temperature": 85.0,  # Placeholder values
         "tire_pressure": 34.0,
         "fuel_efficiency": 15.0,
-        "speed": 60.0,
-        "driving_distance": 100.0,
-        "service_frequency": 5000
+        "speed": 0,
+        "driving_distance": 0,
+        "service_frequency": 0
     }
 
     # Simulate regression model predictions (replace with actual model inference)
