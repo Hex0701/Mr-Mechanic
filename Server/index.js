@@ -17,13 +17,16 @@ app.get('/', (req, res) => {
 
 app.post('/generate', async (req, res) => {
     const { prompt } = req.body; // Extract the prompt from the request body
-    if (!prompt) {
-        return res.status(400).json({ error: 'Prompt is required' });
-    }
+    // if (!prompt) {
+    //     return res.status(400).json({ error: 'Prompt is required' });
+    // }
 
     try {
         const aiResponse = await generateAIResponse(prompt); // Call the AI function
         console.log(aiResponse);
+        const responseArray = aiResponse.split(',').map(Number);
+        console.log(responseArray);
+
         res.json({ response: aiResponse }); // Send the response back to the client
     } catch (error) {
         res.status(500).json({ error: 'Failed to generate AI response' });
