@@ -1,0 +1,1 @@
+{"coefficients": [0.3228794006717011, 1.947817720709954, 21.780250526879115, -0.1018415677294417, 0.03337967489102506, 50.7666991406467], "intercept": -17.543679791640784, "feature_names": ["engine_temperature", "tire_pressure", "fuel_efficiency", "speed", "driving_distance", "service_frequency"]}
