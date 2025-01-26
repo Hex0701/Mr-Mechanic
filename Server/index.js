@@ -16,6 +16,18 @@ app.get('/', (req, res) => {
     res.json({ message: 'Hello from Express!' });
   });
 
+  app.post('/cost', async (req, res) => {
+    try {
+        const { prompt } = req.body;
+        const aiResponse = await generateAIResponse(prompt);
+        const responseArray = aiResponse.split(',').map(Number);
+        const resML = await runPrediction(responseArray);
+        res.json({ success: true, prediction: resML });
+    } catch (error) {
+        
+    }
+  });
+
   app.post('/generate', async (req, res) => {
     const { prompt } = req.body;
 
@@ -27,7 +39,7 @@ app.get('/', (req, res) => {
     const isRelatedPrompt = await validatePrompt(prompt);
     console.log("is related prompt : " + isRelatedPrompt+ ";")
 
-    if (isRelatedPrompt === "No.\n"){
+    if (isRelatedPrompt === "No\n"){
         console.log(isRelatedPrompt)
         return res.status(400).json({ error: 'Prompt must be a car related problem' });
     }
