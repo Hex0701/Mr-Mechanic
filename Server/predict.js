@@ -21,12 +21,14 @@ function predict(input, model) {
 }
 
 // Example usage
-async function runPrediction() {
+async function runPrediction(input) {
     const model = await loadModel();
-    const input = [70, 35.5, 14, 60, 300, 2]; // Replace with your input values
+    // const input = [90, 37, 9, 80, 400, 3 ];
     const predictedCost = predict(input, model);
     console.log(`Predicted Repair Cost: ${predictedCost}`);
 }
 
-runPrediction().catch(console.error);
+//runPrediction().catch(console.error);
+module.exports = runPrediction;
+
 
