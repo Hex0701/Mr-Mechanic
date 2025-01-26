@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const generateAIResponse = require('./promptLLM'); // Import the function
-const runPrediction = require("./predict.js")
+const { generateAIResponse, generateReport } = require('./promptLLM'); // Import the function
+const runPrediction = require("./predict.js");
 
 const app = express();
 const PORT = 8080;
@@ -37,10 +37,12 @@ app.get('/', (req, res) => {
 
         try {
             const resML = await runPrediction(responseArray);
+            const report = await generateReport(prompt, resML);
             console.log("Predicted Repair Cost:", resML); // Log the prediction result
+            console.log("Report:", report); // Log the report result
 
             // Send the prediction back in the response
-            res.json({ success: true, prediction: resML });
+            res.json({ success: true, prediction: report });
         } catch (predictionError) {
             console.error("Prediction error:", predictionError);
             res.status(500).json({ success: false, error: 'Failed to run prediction' });

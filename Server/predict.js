@@ -29,6 +29,7 @@ async function runPrediction(input) {
     return predictedCost;
 }
 
+
 //runPrediction().catch(console.error);
 module.exports = runPrediction;
 
