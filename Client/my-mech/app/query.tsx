@@ -66,26 +66,35 @@ const Query = () => {
 
     // Send POST request to the backend
     const handleSend = async () => {
-        if (!input.trim()) return; // Avoid empty inputs
-        setLoading(true); // Disable button during request
-
-        try {
-            const res = await fetch("http://localhost:8080/generate", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ prompt: input }), // Send the user input
-            });
-            const data = await res.json();
-            setResponse(`Server Response: ${JSON.stringify(data)}`); // Show server response
-        } catch (err) {
-            console.error(err);
-            setResponse("Failed to connect to the server.");
-        } finally {
-            setLoading(false); // Re-enable button
-        }
-    };
+      if (!input.trim()) return; // Avoid empty inputs
+      setLoading(true); // Disable button during request
+  
+      try {
+          const res = await fetch("http://localhost:8080/generate", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ prompt: input }), // Send the user input
+          });
+  
+          const data = await res.json();
+  
+          // Check the success flag and format the response
+          if (data.success) {
+              const roundedPrediction = data.prediction.toFixed(2); // Round to 2 decimal places
+              setResponse(`The cost is $${roundedPrediction}`);
+          } else {
+              setResponse(data.error || "An error occurred.");
+          }
+      } catch (err) {
+          console.error(err);
+          setResponse("Failed to connect to the server.");
+      } finally {
+          setLoading(false); // Re-enable button
+      }
+  };
+  
 
     return (
         <section id="query-section" className="py-20 bg-white">

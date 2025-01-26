@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const { generateAIResponse, generateReport } = require('./promptLLM'); // Import the function
+const { generateAIResponse, generateReport, validatePrompt} = require('./promptLLM'); // Import the function
 const runPrediction = require("./predict.js");
 
 const app = express();
@@ -22,6 +22,10 @@ app.get('/', (req, res) => {
     // Validate prompt
     if (typeof prompt !== 'string' || prompt.trim().length === 0) {
         return res.status(400).json({ error: 'Prompt must be a non-empty string' });
+    }
+    const isRelatedPrompt = await validatePrompt(prompt);
+    if (isRelatedPrompt === "no"){
+        return res.status(400).json({ error: 'Prompt must be a car related problem' });
     }
 
     try {
