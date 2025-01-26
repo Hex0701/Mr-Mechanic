@@ -49,7 +49,7 @@ const Query = () => {
                         {response && (
                             <div>
                                 <div className="bg-green-100 p-4 rounded-b-none rounded-t-lg">{response}</div>
-                                <div className="bg-green-200 p-4 rounded-t-none rounded-b-lg">Estimated Price: {parseFloat(cost).toFixed(2)}</div>
+                                <div className="bg-green-200 p-4 rounded-t-none rounded-b-lg font-bold text-lg">Estimated Price: ${parseFloat(cost).toFixed(2)}</div>
                             </div>
                             
                         )}

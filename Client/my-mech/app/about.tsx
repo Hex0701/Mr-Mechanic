@@ -20,16 +20,16 @@ const About = () =>{
                 </div>
                 <div className="bg-white p-6 rounded-xl shadow-sm">
                   <i className="fa-solid fa-robot text-3xl mb-4"></i>
-                  <h3 className="text-xl font-bold mb-2">AI Analysis</h3>
+                  <h3 className="text-xl font-bold mb-2">ML Analysis</h3>
                   <p className="text-neutral-600">
-                    Our AI processes the information and compares it with millions of cases
+                  Our ML model is trained on thousands of data points, covering the repair prices of numerous cars.
                   </p>
                 </div>
                 <div className="bg-white p-6 rounded-xl shadow-sm">
                   <i className="fa-solid fa-clipboard-check text-3xl mb-4"></i>
                   <h3 className="text-xl font-bold mb-2">Get Results</h3>
                   <p className="text-neutral-600">
-                    Receive detailed diagnostics and recommended solutions for your vehicle
+                    Receive detailed diagnostics and estimates repair costs for your vehicle
                   </p>
                 </div>
               </div>
