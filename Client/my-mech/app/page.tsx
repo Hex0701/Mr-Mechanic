@@ -11,7 +11,7 @@ const MrMechanic = () => {
           <nav className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <i className="fa-solid fa-wrench text-2xl text-neutral-800"></i>
-              <span className="text-xl font-bold">Mr Mechanic</span>
+              <span className="font-bold text-3xl">Mr Mechanic</span>
             </div>
             {/* <div className="hidden md:flex items-center space-x-8">
               <span className="text-neutral-600 hover:text-neutral-900 cursor-pointer">Home</span>
