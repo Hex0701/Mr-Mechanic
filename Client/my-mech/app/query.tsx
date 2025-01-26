@@ -62,10 +62,13 @@ import { useState } from "react";
 const Query = () => {
     const [input, setInput] = useState(""); // Capture user input
     const [response, setResponse] = useState(""); // Display server response
+    const [loading, setLoading] = useState(false); // Track request status
 
     // Send POST request to the backend
     const handleSend = async () => {
         if (!input.trim()) return; // Avoid empty inputs
+        setLoading(true); // Disable button during request
+
         try {
             const res = await fetch("http://localhost:8080/generate", {
                 method: "POST",
@@ -79,6 +82,8 @@ const Query = () => {
         } catch (err) {
             console.error(err);
             setResponse("Failed to connect to the server.");
+        } finally {
+            setLoading(false); // Re-enable button
         }
     };
 
@@ -100,9 +105,14 @@ const Query = () => {
                             />
                             <button
                                 onClick={handleSend}
-                                className="bg-black text-white px-4 py-2 rounded-lg hover:bg-neutral-800"
+                                disabled={!input.trim() || loading} // Disable button condition
+                                className={`px-4 py-2 rounded-lg ${
+                                    loading || !input.trim()
+                                        ? "bg-neutral-400 text-neutral-700 cursor-not-allowed"
+                                        : "bg-black text-white hover:bg-neutral-800"
+                                }`}
                             >
-                                Send
+                                {loading ? "Loading..." : "Send"}
                             </button>
                         </div>
                     </div>
@@ -113,3 +123,4 @@ const Query = () => {
 };
 
 export default Query;
+
