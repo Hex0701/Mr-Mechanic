@@ -96,7 +96,13 @@ const Query = () => {
                 <div className="max-w-4xl mx-auto bg-neutral-50 rounded-xl p-6 shadow-sm">
                     <div className="space-y-4">
                         {/* Display server response */}
-                        {response && <div className="bg-green-100 p-4 rounded-lg">{response}</div>}
+                        {response && (
+                            <div>
+                                <div className="bg-green-100 p-4 rounded-b-none rounded-t-lg">{response}</div>
+                                <div className="bg-green-200 p-4 rounded-t-none rounded-b-lg">Estimated Price: {}</div>
+                            </div>
+                            
+                        )}
                         {/* Input and Button */}
                         <div className="flex items-center space-x-2">
                             <input
