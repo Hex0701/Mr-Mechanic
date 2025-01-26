@@ -80,13 +80,7 @@ const Query = () => {
   
           const data = await res.json();
   
-          // Check the success flag and format the response
-          if (data.success) {
-              const roundedPrediction = data.prediction.toFixed(2); // Round to 2 decimal places
-              setResponse(`The cost is $${roundedPrediction}`);
-          } else {
-              setResponse(data.error || "An error occurred.");
-          }
+          setResponse(`Server Response: ${JSON.stringify(data)}`); // Show server response
       } catch (err) {
           console.error(err);
           setResponse("Failed to connect to the server.");
