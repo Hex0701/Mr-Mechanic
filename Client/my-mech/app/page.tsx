@@ -2,11 +2,10 @@
 import About from './about';
 import Hero from './hero';
 import Query from './query';
-import App from './restService';
 const MrMechanic = () => {
   return (
     <div id="root" className="min-h-screen bg-white">
-      <App />
+      {/* <App /> */}
       <header id="header" className="fixed w-full bg-white border-b border-neutral-200 z-50">
         <div className="container mx-auto px-4 py-4">
           <nav className="flex items-center justify-between">
