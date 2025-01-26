@@ -24,4 +24,15 @@ async function generateReport(prompt, price) {
     }
 }
 
-module.exports = { generateAIResponse, generateReport }; // Correct export
+async function  validatePrompt(prompt) {
+    try {
+        const model = await genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+        const result = await model.validateContent("prompt : " + prompt + "is the prompt related to car problems yes or no ");
+        return result.response.text();
+    } catch (error) {
+        console.error("Error error validating:", error);
+        throw error;
+    }
+}
+
+module.exports = { generateAIResponse, generateReport, validatePrompt}; // Correct export
