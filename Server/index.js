@@ -6,6 +6,7 @@ const runPrediction = require("./predict.js");
 
 const app = express();
 const PORT = 8080;
+var cost = 0;
 
 // Middleware
 app.use(cors());
@@ -16,16 +17,17 @@ app.get('/', (req, res) => {
     res.json({ message: 'Hello from Express!' });
   });
 
-  app.post('/cost', async (req, res) => {
-    try {
-        const { prompt } = req.body;
-        const aiResponse = await generateAIResponse(prompt);
-        const responseArray = aiResponse.split(',').map(Number);
-        const resML = await runPrediction(responseArray);
-        res.json({ success: true, prediction: resML });
-    } catch (error) {
+  app.get('/cost', (req, res) => {
+    // try {
+    //     const { prompt } = req.body;
+    //     const aiResponse = await generateAIResponse(prompt);
+    //     const responseArray = aiResponse.split(',').map(Number);
+    //     const resML = await runPrediction(responseArray);
+    //     res.json({ success: true, prediction: resML });
+    // } catch (error) {
         
-    }
+    // }
+    res.json({ cost: cost });
   });
 
   app.post('/generate', async (req, res) => {
@@ -59,6 +61,7 @@ app.get('/', (req, res) => {
     
             try {
                 const resML = await runPrediction(responseArray);
+                cost = resML;
                 const report = await generateReport(prompt, resML);
                 console.log("Predicted Repair Cost:", resML); // Log the prediction result
                 console.log("Report:", report); // Log the report result
