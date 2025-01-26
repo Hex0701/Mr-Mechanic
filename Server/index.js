@@ -37,7 +37,7 @@ app.post('/generate', async (req, res) => {
             console.log(resML); // Log the machine learning response
 
             // Send the prediction response to the client
-            res.json({ response: aiResponse, prediction: resML });
+            res.json({ prediction: resML });
         } catch (predictionError) {
             console.error("Prediction error:", predictionError);
             res.status(500).json({ error: 'Failed to run prediction' });
