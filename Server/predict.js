@@ -26,6 +26,7 @@ async function runPrediction(input) {
     // const input = [90, 37, 9, 80, 400, 3 ];
     const predictedCost = predict(input, model);
     console.log(`Predicted Repair Cost: ${predictedCost}`);
+    return predictedCost;
 }
 
 //runPrediction().catch(console.error);

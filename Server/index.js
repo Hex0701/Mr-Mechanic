@@ -16,38 +16,41 @@ app.get('/', (req, res) => {
     res.json({ message: 'Hello from Express!' });
   });
 
-app.post('/generate', async (req, res) => {
-    const { prompt } = req.body; // Extract the prompt from the request body
-    // Uncommented prompt validation to ensure prompt is provided
-    if (!prompt) {
-        return res.status(400).json({ error: 'Prompt is required' });
+  app.post('/generate', async (req, res) => {
+    const { prompt } = req.body;
+
+    // Validate prompt
+    if (typeof prompt !== 'string' || prompt.trim().length === 0) {
+        return res.status(400).json({ error: 'Prompt must be a non-empty string' });
     }
 
     try {
-        const aiResponse = await generateAIResponse(prompt); // Call the AI function
-        console.log(aiResponse);
+        const aiResponse = await generateAIResponse(prompt);
+        console.log("AI Response:", aiResponse);
 
         // Convert aiResponse string to array of numbers
         const responseArray = aiResponse.split(',').map(Number);
-        console.log(responseArray);
+
+        if (responseArray.some(isNaN)) {
+            return res.status(400).json({ error: 'AI response contains invalid data' });
+        }
 
         try {
-            // Assuming runPrediction is an async function that returns a prediction
             const resML = await runPrediction(responseArray);
-            console.log(resML); // Log the machine learning response
+            console.log("Predicted Repair Cost:", resML); // Log the prediction result
 
-            // Send the prediction response to the client
-            res.json({ prediction: resML });
+            // Send the prediction back in the response
+            res.json({ success: true, prediction: resML });
         } catch (predictionError) {
             console.error("Prediction error:", predictionError);
-            res.status(500).json({ error: 'Failed to run prediction' });
+            res.status(500).json({ success: false, error: 'Failed to run prediction' });
         }
-        
     } catch (error) {
         console.error("AI response generation error:", error);
-        res.status(500).json({ error: 'Failed to generate AI response' });
+        res.status(500).json({ success: false, error: 'Failed to generate AI response' });
     }
 });
+
 
 
 // Start the server
