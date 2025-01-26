@@ -10,7 +10,7 @@ const App = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  return <div>{data}</div>;
+  return <div>{data ? JSON.stringify(data) : "Loading..."}</div>;
 };
 
 export default App;

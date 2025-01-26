@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 
 // Routes
 app.get('/', (req, res) => {
-    res.send('Hello from Express!');
-});
+    res.json({ message: 'Hello from Express!' });
+  });
 
 app.post('/generate', async (req, res) => {
     const { prompt } = req.body; // Extract the prompt from the request body
