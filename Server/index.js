@@ -16,6 +16,18 @@ app.get('/', (req, res) => {
     res.json({ message: 'Hello from Express!' });
   });
 
+  app.post('/cost', async (req, res) => {
+    try {
+        const { prompt } = req.body;
+        const aiResponse = await generateAIResponse(prompt);
+        const responseArray = aiResponse.split(',').map(Number);
+        const resML = await runPrediction(responseArray);
+        res.json({ success: true, prediction: resML });
+    } catch (error) {
+        
+    }
+  });
+
   app.post('/generate', async (req, res) => {
     const { prompt } = req.body;
 

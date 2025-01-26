@@ -80,7 +80,7 @@ const Query = () => {
   
           const data = await res.json();
   
-          setResponse(`Server Response: ${JSON.stringify(data)}`); // Show server response
+          setResponse(data.prediction); // Show server response
       } catch (err) {
           console.error(err);
           setResponse("Failed to connect to the server.");

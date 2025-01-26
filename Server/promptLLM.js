@@ -16,7 +16,7 @@ async function generateAIResponse(prompt) {
 async function generateReport(prompt, price) {
     try {
         const model = await genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        const result = await model.generateContent(prompt + "price to fix: " + price + "generate a very short report of what could have gone wrong with the car");
+        const result = await model.generateContent(prompt + "price to fix: " + price + "generate a very short report of what the fault could be only.");
         return result.response.text();
     } catch (error) {
         console.error("Error generating report:", error);
