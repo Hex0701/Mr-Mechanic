@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
     const isRelatedPrompt = await validatePrompt(prompt);
     console.log("is related prompt : " + isRelatedPrompt+ ";")
 
-    if (isRelatedPrompt === "No.\n"){
+    if (isRelatedPrompt === "No\n"){
         console.log(isRelatedPrompt)
         return res.status(400).json({ error: 'Prompt must be a car related problem' });
     }

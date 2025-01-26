@@ -27,7 +27,7 @@ async function generateReport(prompt, price) {
 async function  validatePrompt(prompt) {
     try {
         const model = await genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
-        const result = await model.generateContent("prompt : " + prompt + "is the prompt related to car problems yes or no ");
+        const result = await model.generateContent("prompt : " + prompt + "is the prompt related to car problems and dose it provide enough info yes or no answers only ");
         return result.response.text();
     } catch (error) {
         console.error("Error error validating:", error);
