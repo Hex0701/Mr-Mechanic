@@ -23,37 +23,45 @@ app.get('/', (req, res) => {
     if (typeof prompt !== 'string' || prompt.trim().length === 0) {
         return res.status(400).json({ error: 'Prompt must be a non-empty string' });
     }
+
     const isRelatedPrompt = await validatePrompt(prompt);
-    if (isRelatedPrompt === "no"){
+    console.log("is related prompt : " + isRelatedPrompt+ ";")
+
+    if (isRelatedPrompt === "No.\n"){
+        console.log(isRelatedPrompt)
         return res.status(400).json({ error: 'Prompt must be a car related problem' });
     }
 
-    try {
-        const aiResponse = await generateAIResponse(prompt);
-        console.log("AI Response:", aiResponse);
-
-        // Convert aiResponse string to array of numbers
-        const responseArray = aiResponse.split(',').map(Number);
-
-        if (responseArray.some(isNaN)) {
-            return res.status(400).json({ error: 'AI response contains invalid data' });
-        }
+    else {
 
         try {
-            const resML = await runPrediction(responseArray);
-            const report = await generateReport(prompt, resML);
-            console.log("Predicted Repair Cost:", resML); // Log the prediction result
-            console.log("Report:", report); // Log the report result
-
-            // Send the prediction back in the response
-            res.json({ success: true, prediction: report });
-        } catch (predictionError) {
-            console.error("Prediction error:", predictionError);
-            res.status(500).json({ success: false, error: 'Failed to run prediction' });
+            const aiResponse = await generateAIResponse(prompt);
+            console.log("AI Response:", aiResponse);
+    
+            // Convert aiResponse string to array of numbers
+            const responseArray = aiResponse.split(',').map(Number);
+    
+            if (responseArray.some(isNaN)) {
+                return res.status(400).json({ error: 'AI response contains invalid data' });
+            }
+    
+            try {
+                const resML = await runPrediction(responseArray);
+                const report = await generateReport(prompt, resML);
+                console.log("Predicted Repair Cost:", resML); // Log the prediction result
+                console.log("Report:", report); // Log the report result
+    
+                // Send the prediction back in the response
+                res.json({ success: true, prediction: report });
+            } catch (predictionError) {
+                console.error("Prediction error:", predictionError);
+                res.status(500).json({ success: false, error: 'Failed to run prediction' });
+            }
+    
+        } catch (error) {
+            console.error("AI response generation error:", error);
+            res.status(500).json({ success: false, error: 'Failed to generate AI response' });
         }
-    } catch (error) {
-        console.error("AI response generation error:", error);
-        res.status(500).json({ success: false, error: 'Failed to generate AI response' });
     }
 });
 
