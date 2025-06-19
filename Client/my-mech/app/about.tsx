@@ -7,7 +7,7 @@ const About = () =>{
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold mb-4">How Mr Mechanic Works</h2>
                 <p className="text-neutral-600">
-                  Our AI-powered system analyzes your vehicle's information to provide accurate diagnostics
+                  Our AI-powered system analyzes your vehicle&apos; information to provide accurate diagnostics
                 </p>
               </div>
               <div className="grid md:grid-cols-3 gap-8">
@@ -15,7 +15,7 @@ const About = () =>{
                   <i className="fa-solid fa-car text-3xl mb-4"></i>
                   <h3 className="text-xl font-bold mb-2">Enter Vehicle Info</h3>
                   <p className="text-neutral-600">
-                    Provide your car's details and describe the issues you're experiencing
+                    Provide your car&apos;sdetails and describe the issues you&apos; experiencing
                   </p>
                 </div>
                 <div className="bg-white p-6 rounded-xl shadow-sm">
